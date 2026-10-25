@@ -41,7 +41,7 @@ include(Hunter/init)
 cable_set_build_type(DEFAULT Release CONFIGURATION_TYPES Debug Release)
 
 project(qrvmc)
-set(PROJECT_VERSION 2.0.0)
+set(PROJECT_VERSION 3.0.0)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 

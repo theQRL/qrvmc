@@ -5,15 +5,19 @@ Documentation of all notable changes to the **QRVMC** project.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
-## [Unreleased]
+## [3.0.0] — 2026-10-25
 
 ### Breaking changes
 
+- The QRVMC ABI version is now 3 (`QRVMC_ABI_VERSION = 3`), following the
+  revision renumbering below. The loader rejects a VM built against ABI 2
+  headers, and an ABI 2 host rejects a VM built against these, with
+  `QRVMC_LOADER_ABI_VERSION_MISMATCH`, instead of loading it and passing
+  revision values the VM interprets differently.
 - `QRVMC_ZOND` is now `0` (it was `1`), and `QRVMC_MAX_REVISION` and
-  `QRVMC_LATEST_STABLE_REVISION` follow it. The ABI version stays 2, so a
-  host built against older headers still loads a newer VM but passes
-  revision `1`, which VMs that index per-revision tables read out of range.
-  Hosts and VMs must be built against the same headers.
+  `QRVMC_LATEST_STABLE_REVISION` follow it. Under ABI version 2 a host built
+  against older headers loaded a newer VM and passed revision `1`, which VMs
+  that index per-revision tables read out of range.
 - `qrvmc::bytes` and `qrvmc::bytes_view` are now
   `std::basic_string<unsigned char, qrvmc::byte_traits<unsigned char>>` and
   the matching `std::basic_string_view`, defined in `<qrvmc/bytes.hpp>` (as
@@ -60,7 +64,7 @@ incompatible with hosts built against this release and vice versa.
 - `QRVMC_ABI_VERSION` check must match exactly between host and VM;
   dynamic-loader callers should reject mismatches on load.
 
-[Unreleased]: https://github.com/theQRL/qrvmc/commits/main
+[3.0.0]: https://github.com/theQRL/qrvmc/releases/tag/v3.0.0
 [2.0.0]: https://github.com/theQRL/qrvmc/releases/tag/v2.0.0
 
 [Keep a Changelog]: https://keepachangelog.com
