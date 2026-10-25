@@ -3,6 +3,7 @@
 // Licensed under the Apache License, Version 2.0.
 #pragma once
 
+#include <qrvmc/bytes.hpp>
 #include <qrvmc/filter_iterator.hpp>
 #include <cstdint>
 #include <optional>
@@ -11,12 +12,6 @@
 
 namespace qrvmc
 {
-/// String of uint8_t chars.
-using bytes = std::basic_string<uint8_t>;
-
-/// String view of uint8_t chars.
-using bytes_view = std::basic_string_view<uint8_t>;
-
 
 /// Encode a byte to a hex string.
 inline std::string hex(uint8_t b)

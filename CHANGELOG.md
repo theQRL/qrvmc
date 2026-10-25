@@ -5,6 +5,27 @@ Documentation of all notable changes to the **QRVMC** project.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [Unreleased]
+
+### Breaking changes
+
+- `QRVMC_ZOND` is now `0` (it was `1`), and `QRVMC_MAX_REVISION` and
+  `QRVMC_LATEST_STABLE_REVISION` follow it. The ABI version stays 2, so a
+  host built against older headers still loads a newer VM but passes
+  revision `1`, which VMs that index per-revision tables read out of range.
+  Hosts and VMs must be built against the same headers.
+- `qrvmc::bytes` and `qrvmc::bytes_view` are now
+  `std::basic_string<unsigned char, qrvmc::byte_traits<unsigned char>>` and
+  the matching `std::basic_string_view`, defined in `<qrvmc/bytes.hpp>` (as
+  in EVMC 11+). libc++ 19 and later deprecate `std::char_traits<uint8_t>`,
+  which the previous aliases used. Code that spells
+  `std::basic_string<uint8_t>` for QRVMC buffers should use `qrvmc::bytes`.
+
+### Fixed
+
+- Tests and tools configure with CMake 4: Hunter's CLI11 package is built with
+  `CMAKE_POLICY_VERSION_MINIMUM=3.5`.
+
 ## [2.0.0] — 2026-04-23
 
 ### Breaking changes
@@ -39,6 +60,7 @@ incompatible with hosts built against this release and vice versa.
 - `QRVMC_ABI_VERSION` check must match exactly between host and VM;
   dynamic-loader callers should reject mismatches on load.
 
+[Unreleased]: https://github.com/theQRL/qrvmc/commits/main
 [2.0.0]: https://github.com/theQRL/qrvmc/releases/tag/v2.0.0
 
 [Keep a Changelog]: https://keepachangelog.com

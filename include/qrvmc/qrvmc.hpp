@@ -20,9 +20,6 @@ static_assert(QRVMC_LATEST_STABLE_REVISION <= QRVMC_MAX_REVISION,
 /// @ingroup cpp
 namespace qrvmc
 {
-/// String view of uint8_t chars.
-using bytes_view = std::basic_string_view<uint8_t>;
-
 /// The big-endian 512-bit value suitable for keeping a QRL address.
 ///
 /// This type wraps C ::qrvmc_address to make sure objects of this type are always initialized.
